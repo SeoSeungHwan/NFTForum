@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/newsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_article_24"
+        android:title="News"/>
+    <item
+        android:id="@+id/marketListFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_format_list_numbered_24"
+        android:title="Market"/>
+
+</menu>

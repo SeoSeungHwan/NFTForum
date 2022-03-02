@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/marketListFragment">
+
+    <fragment
+        android:id="@+id/marketListFragment"
+        android:name="com.router.nftforum.view.fragment.MarketListFragment"
+        android:label="MarketListFragment" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.router.nftforum.view.fragment.NewsFragment"
+        android:label="NewsFragment" />
+</navigation>
