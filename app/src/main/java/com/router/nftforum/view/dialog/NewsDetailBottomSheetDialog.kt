@@ -2,6 +2,7 @@ package com.router.nftforum.view.dialog
 
 
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
@@ -9,17 +10,11 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
 import com.router.nftforum.R
 import com.router.nftforum.databinding.DialogBottomSheetNewsDetailBinding
 import com.router.nftforum.util.ViewUtil
 import com.router.nftforum.view.base.BaseBottomSheetDialogFragment
 import android.content.Intent
-
-
-
-
 
 class NewsDetailBottomSheetDialog :
     BaseBottomSheetDialogFragment<DialogBottomSheetNewsDetailBinding>() {
@@ -37,6 +32,11 @@ class NewsDetailBottomSheetDialog :
         setUpBtnListener()
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        //로딩 되기 전 다이어로그를 끄게 되면 터치 다시 돌아가게 하기
+        ViewUtil().hideLoadingProgressBar(viewDataBinding.progressBar, activity?.window)
+    }
     private fun initWebview() {
         viewDataBinding.webview.apply {
             webViewClient = WebViewClient()
@@ -61,7 +61,7 @@ class NewsDetailBottomSheetDialog :
             }
 
             settings.apply {
-                javaScriptEnabled = false
+                javaScriptEnabled = true
                 domStorageEnabled = false
                 layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
                 setSupportMultipleWindows(false)
