@@ -1,12 +1,16 @@
-package com.router.nftforum.view
+package com.router.nftforum.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.router.nftforum.R
+import com.router.nftforum.databinding.ActivityMainBinding
+import com.router.nftforum.view.base.BaseActivityForViewBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivityForViewBinding<ActivityMainBinding>() {
+    override val layoutId: Int
+        get() = R.layout.activity_main
+
+    override fun init() {
+
     }
+
+
 }
