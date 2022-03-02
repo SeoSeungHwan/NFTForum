@@ -33,7 +33,7 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
     }
 
     private fun fetchNaverNews(){
-        newsViewModel.fetchNaverNews("NFT",20,1,"date")
+        newsViewModel.fetchNaverNews("NFT",100,1,"sim")
         ViewUtil().showLoadingProgressBar(viewDataBinding.progressBar, activity?.window)
     }
 
