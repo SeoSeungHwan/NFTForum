@@ -8,6 +8,7 @@ import com.router.nftforum.adapter.NewsRecyclerViewAdapter
 import com.router.nftforum.binding.NaverNewsHolderModel
 import com.router.nftforum.databinding.FragmentNewsBinding
 import com.router.nftforum.model.repository.MyRepository
+import com.router.nftforum.util.ViewUtil
 import com.router.nftforum.view.base.BaseFragmentForViewBinding
 import com.router.nftforum.viewmodel.NewsViewModel
 
@@ -30,6 +31,7 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
 
     private fun fetchNaverNews(){
         newsViewModel.fetchNaverNews("NFT",20,1,"date")
+        ViewUtil().showLoadingProgressBar(viewDataBinding.progressBar, activity?.window)
     }
 
     private fun setUpObserver(){
@@ -42,7 +44,7 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
             adapter = NewsRecyclerViewAdapter(hideList, ::clickNews)
             layoutManager = LinearLayoutManager(context)
         }
-
+        ViewUtil().hideLoadingProgressBar(viewDataBinding.progressBar, activity?.window)
     }
 
     private fun clickNews(title: String) {
