@@ -1,5 +1,6 @@
 package com.router.nftforum.view.fragment
 
+import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kakaobrain.pathfinder_prodo.viewmodel.viewmodelfactory.MyRepositoryViewModelFactory
@@ -10,6 +11,7 @@ import com.router.nftforum.databinding.FragmentNewsBinding
 import com.router.nftforum.model.repository.MyRepository
 import com.router.nftforum.util.ViewUtil
 import com.router.nftforum.view.base.BaseFragmentForViewBinding
+import com.router.nftforum.view.dialog.NewsDetailBottomSheetDialog
 import com.router.nftforum.viewmodel.NewsViewModel
 
 
@@ -47,8 +49,12 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
         ViewUtil().hideLoadingProgressBar(viewDataBinding.progressBar, activity?.window)
     }
 
-    private fun clickNews(title: String) {
-        //TODO  : 클릭했을 때 뉴스 상세페이지 이동
+    private fun clickNews(url: String) {
+        NewsDetailBottomSheetDialog().apply {
+            arguments = Bundle().apply {
+                putString("url", url)
+            }
+        }.show(childFragmentManager, "CardDetail")
     }
 
 }

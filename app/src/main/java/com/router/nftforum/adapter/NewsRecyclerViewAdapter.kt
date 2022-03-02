@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.router.nftforum.binding.NaverNewsHolderModel
 import com.router.nftforum.databinding.HolderNewsBinding
 
-class NewsRecyclerViewAdapter(private val modelList: List<NaverNewsHolderModel>, private val clickUnit: (title: String) ->Unit): RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>() {
+class NewsRecyclerViewAdapter(private val modelList: List<NaverNewsHolderModel>, private val clickUnit: (url: String) ->Unit): RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewDataBinding = HolderNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,7 +27,7 @@ class NewsRecyclerViewAdapter(private val modelList: List<NaverNewsHolderModel>,
             viewDataBinding.holderModel = holderModel
 
             itemView.setOnClickListener {
-                clickUnit(holderModel.title)
+                clickUnit(holderModel.link)
             }
         }
     }
