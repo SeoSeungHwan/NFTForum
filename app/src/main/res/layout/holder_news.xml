@@ -80,7 +80,7 @@
                 android:ellipsize="end"
                 android:gravity="left|center"
                 android:maxLines="1"
-                android:text="@{holderModel.pubDate}"
+                android:text="@{holderModel.changeDateFormat()}"
                 android:textSize="14sp"
                 tools:text="날짜" />
 

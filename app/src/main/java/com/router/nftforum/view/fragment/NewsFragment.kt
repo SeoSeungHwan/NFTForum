@@ -32,7 +32,7 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
     }
     override fun init() {
         viewDataBinding.viewModel = newsViewModel
-        fetchNaverNews("date")
+        fetchNaverNews("sim")
         setUpObserver()
         setUpBtnListener()
     }
@@ -48,9 +48,9 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val position = tab.position
                 if (position == 0) {
-                    fetchNaverNews("date")
-                } else if (position == 1) {
                     fetchNaverNews("sim")
+                } else if (position == 1) {
+                    fetchNaverNews("date")
                 }
             }
 
@@ -78,7 +78,6 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
         }
         NewsDetailBottomSheetDialog().apply {
             arguments = Bundle().apply {
-                Log.d("haha", "clickNews: $url ")
                 putString("url", url)
             }
         }.show(childFragmentManager, "CardDetail")
