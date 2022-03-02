@@ -1,26 +1,13 @@
 package com.router.nftforum.model.retrofit.data
 
 import com.google.gson.annotations.SerializedName
-
-
-data class NewsItemResponseModel(
-    @SerializedName("description")
-    val description: String,
-    @SerializedName("link")
-    val link: String,
-    @SerializedName("originallink")
-    val originallink: String,
-    @SerializedName("pubDate")
-    val pubDate: String,
-    @SerializedName("title")
-    val title: String
-)
+import com.router.nftforum.binding.NaverNewsHolderModel
 
 data class NewsItemsResponseModel(
     @SerializedName("display")
     val display: Int,
     @SerializedName("items")
-    val items: List<NewsItemResponseModel>,
+    val items: List<NaverNewsHolderModel>,
     @SerializedName("lastBuildDate")
     val lastBuildDate: String,
     @SerializedName("start")
