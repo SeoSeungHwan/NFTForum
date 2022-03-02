@@ -1,6 +1,7 @@
 package com.router.nftforum.view.fragment
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kakaobrain.pathfinder_prodo.viewmodel.viewmodelfactory.MyRepositoryViewModelFactory
@@ -41,15 +42,18 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
             setUpNewsRecyclerView(it)
         }
     }
-    private fun setUpNewsRecyclerView(hideList: List<NaverNewsHolderModel>) {
+    private fun setUpNewsRecyclerView(naverNews: List<NaverNewsHolderModel>) {
         viewDataBinding.newsRecyclerview.apply {
-            adapter = NewsRecyclerViewAdapter(hideList, ::clickNews)
+            adapter = NewsRecyclerViewAdapter(naverNews, ::clickNews)
             layoutManager = LinearLayoutManager(context)
         }
         ViewUtil().hideLoadingProgressBar(viewDataBinding.progressBar, activity?.window)
     }
 
     private fun clickNews(url: String) {
+        if(url.contains("segyebiz")){
+            Toast.makeText(context,"해당 뉴스는 모바일 버전을 지원하지않습니다.",Toast.LENGTH_SHORT).show()
+        }
         NewsDetailBottomSheetDialog().apply {
             arguments = Bundle().apply {
                 putString("url", url)

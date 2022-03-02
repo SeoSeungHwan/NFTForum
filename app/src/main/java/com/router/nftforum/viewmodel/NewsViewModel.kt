@@ -20,6 +20,9 @@ class NewsViewModel(override val myRepository: MyRepository): BaseMyRepositoryVi
             CoroutineScope(Dispatchers.IO).launch {
                 myRepository.getNaverNews(query,display,start,sort).let {
                         response ->
+
+                    val newsList = response.items
+
                     _naverNewsListLiveData.postValue(response.items)
                 }
             }
