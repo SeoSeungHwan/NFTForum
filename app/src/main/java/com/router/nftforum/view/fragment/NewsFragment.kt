@@ -1,9 +1,13 @@
 package com.router.nftforum.view.fragment
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.TableLayout
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kakaobrain.pathfinder_prodo.viewmodel.viewmodelfactory.MyRepositoryViewModelFactory
 import com.router.nftforum.R
 import com.router.nftforum.adapter.NewsRecyclerViewAdapter
@@ -14,6 +18,7 @@ import com.router.nftforum.util.ViewUtil
 import com.router.nftforum.view.base.BaseFragmentForViewBinding
 import com.router.nftforum.view.dialog.NewsDetailBottomSheetDialog
 import com.router.nftforum.viewmodel.NewsViewModel
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
 
 class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
@@ -27,21 +32,38 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
     }
     override fun init() {
         viewDataBinding.viewModel = newsViewModel
-        fetchNaverNews()
+        fetchNaverNews("date")
         setUpObserver()
-
+        setUpBtnListener()
     }
 
-    private fun fetchNaverNews(){
-        newsViewModel.fetchNaverNews("NFT",100,1,"sim")
+    private fun fetchNaverNews(sort : String){
+        newsViewModel.fetchNaverNews("NFT",100,1,sort)
         ViewUtil().showLoadingProgressBar(viewDataBinding.progressBar, activity?.window)
     }
 
+
+    private fun setUpBtnListener(){
+        viewDataBinding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                val position = tab.position
+                if (position == 0) {
+                    fetchNaverNews("date")
+                } else if (position == 1) {
+                    fetchNaverNews("sim")
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+    }
     private fun setUpObserver(){
         newsViewModel.naverNewsListLiveData.observe(viewLifecycleOwner){
             setUpNewsRecyclerView(it)
         }
     }
+
     private fun setUpNewsRecyclerView(naverNews: List<NaverNewsHolderModel>) {
         viewDataBinding.newsRecyclerview.apply {
             adapter = NewsRecyclerViewAdapter(naverNews, ::clickNews)
@@ -56,9 +78,11 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
         }
         NewsDetailBottomSheetDialog().apply {
             arguments = Bundle().apply {
+                Log.d("haha", "clickNews: $url ")
                 putString("url", url)
             }
         }.show(childFragmentManager, "CardDetail")
     }
+
 
 }
