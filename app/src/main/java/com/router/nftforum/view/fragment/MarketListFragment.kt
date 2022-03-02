@@ -2,7 +2,6 @@ package com.router.nftforum.view.fragment
 
 import com.router.nftforum.R
 import com.router.nftforum.databinding.FragmentMarketListBinding
-import com.router.nftforum.databinding.FragmentNewsBinding
 import com.router.nftforum.view.base.BaseFragmentForViewBinding
 
 
