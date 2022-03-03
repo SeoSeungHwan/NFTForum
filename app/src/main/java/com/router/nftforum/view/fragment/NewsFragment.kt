@@ -1,13 +1,12 @@
 package com.router.nftforum.view.fragment
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.TableLayout
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.kakaobrain.pathfinder_prodo.viewmodel.viewmodelfactory.MyRepositoryViewModelFactory
 import com.router.nftforum.R
 import com.router.nftforum.adapter.NewsRecyclerViewAdapter
@@ -30,6 +29,8 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
             NewsViewModel::class.java
         )
     }
+
+    private var position : Int =0
     override fun init() {
         viewDataBinding.viewModel = newsViewModel
         fetchNaverNews("sim")
@@ -46,7 +47,7 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
     private fun setUpBtnListener(){
         viewDataBinding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                val position = tab.position
+                position = tab.position
                 if (position == 0) {
                     fetchNaverNews("sim")
                 } else if (position == 1) {
@@ -83,5 +84,15 @@ class NewsFragment: BaseFragmentForViewBinding<FragmentNewsBinding>() {
         }.show(childFragmentManager, "CardDetail")
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewDataBinding.newsSwipeRefreshLayout.setOnRefreshListener {
+            viewDataBinding.newsSwipeRefreshLayout.isRefreshing = false
+            if (position == 0) {
+                fetchNaverNews("sim")
+            } else if (position == 1) {
+                fetchNaverNews("date")
+            }
+        }
+    }
 }
