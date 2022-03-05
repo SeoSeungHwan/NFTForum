@@ -4,4 +4,7 @@
     <!--market_list-->
     <string name="explain">준비중입니다.</string>
 
+    <!--Admob-->
+    <string name="banner">ca-app-pub-5086679279657695/4807964779</string>
+    <string name="banner_test">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

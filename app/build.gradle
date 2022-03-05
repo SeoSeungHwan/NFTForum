@@ -14,8 +14,8 @@ android {
         applicationId "com.router.nftforum"
         minSdk 21
         targetSdk 32
-        versionCode 2
-        versionName "1.01"
+        versionCode 3
+        versionName "1.02"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -59,6 +59,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+
     // GsonConverter & Retrofit2 & Okhttp3 For Network Connection
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -72,5 +73,10 @@ dependencies {
     //Paging
     implementation "androidx.paging:paging-runtime-ktx:3.1.0"
 
+    //Admob
+    implementation 'com.google.android.gms:play-services-ads-lite:20.2.0'
+
+    //PendingIntent Error
+    implementation 'androidx.work:work-runtime-ktx:2.7.0'
 
 }
